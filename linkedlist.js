@@ -71,14 +71,14 @@ class LinkedList {
 
     toString() {
         if (this.listSize === 0 || !this.head) {
-            return `Null: Linked list is empty!`;
+            return `Empty linked list!`;
         }
 
         let current = this.head;
         let string = "";
 
         while (current) {
-            string += `( ${current.value} ) => `;
+            string += `( ${current.key} : ${current.value} ) => `;
             current = current.nextNode;
         }
 
