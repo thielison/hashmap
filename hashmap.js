@@ -53,6 +53,20 @@ class HashMap {
         return value;
     }
 
+    // Takes a key and returns true or false based on whether or not the key is in the hash map
+    has(key) {
+        const index = this.hash(key);
+
+        // Throw an error if we try to access an out of bound index
+        if (index < 0 || index >= this.buckets.length) {
+            throw new Error("Trying to access index out of bound");
+        }
+
+        const linkedList = this.buckets[index];
+
+        return linkedList.contains(key);
+    }
+
     // Returns the string representation of the bucket (linked list) for the given key
     getBucketAsString(key) {
         const index = this.hash(key);
@@ -96,3 +110,4 @@ console.log(test);
 console.log(`Number of buckets: ${test.numberOfBuckets()}`);
 console.log(test.getBucketAsString("dog"));
 console.log(test.get("grape"));
+console.log("Is 'ice cream' in the hash map? " + test.has("ice cream"));
