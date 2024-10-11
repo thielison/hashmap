@@ -64,6 +64,22 @@ class LinkedList {
         return false;
     }
 
+    // Returns a value that is assigned to a key
+    find(key) {
+        let current = this.head;
+
+        while (current) {
+            if (current.key === key) {
+                return current.value;
+            }
+
+            current = current.nextNode;
+        }
+
+        // If a key is not found, return null
+        return null;
+    }
+
     // Returns the total number of nodes in this list
     size() {
         return this.listSize;
