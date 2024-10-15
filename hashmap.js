@@ -113,6 +113,17 @@ class HashMap {
     length() {
         return this.numberOfEntries;
     }
+
+    // Removes all entries in the hash map
+    clear() {
+        // Reset each bucket to a new LinkedList
+        for (let i = 0; i < this.buckets.length; i++) {
+            this.buckets[i] = new LinkedList();
+        }
+
+        // Reset the count of entries
+        this.numberOfEntries = 0;
+    }
 }
 
 const test = new HashMap();
@@ -134,5 +145,6 @@ test.set("apple", "red");
 test.set("banana", "yellow");
 test.set("carrot", "orange");
 
+test.clear();
 console.log(test);
 console.log("Number of entries (key-value pairs): " + test.length());
