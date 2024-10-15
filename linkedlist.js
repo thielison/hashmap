@@ -80,6 +80,38 @@ class LinkedList {
         return null;
     }
 
+    // Removes a node with the given key from the linked list
+    remove(key) {
+        let current = this.head;
+        // 'previous' tracks the node before 'current'; starts as null since the head has no previous node
+        let previous = null;
+
+        // Traverse the list until the node with the matching key is found, or the end of the list is reached
+        while (current) {
+            // If the current node's key matches the key to remove
+            if (current.key === key) {
+                // If the node to remove is the head node, update the head to the next node
+                if (current === this.head) {
+                    this.head = this.head.nextNode;
+                } else {
+                    // If it's not the head, link the previous node to the next node, bypassing 'current'
+                    previous.nextNode = current.nextNode;
+                }
+
+                this.listSize -= 1;
+
+                // Node has been successfully removed, return true
+                return true;
+            } else {
+                previous = current;
+                current = current.nextNode;
+            }
+        }
+
+        // If the key was not found in the list, return false
+        return false;
+    }
+
     // Returns the total number of nodes in this list
     size() {
         return this.listSize;

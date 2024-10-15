@@ -67,6 +67,29 @@ class HashMap {
         return linkedList.contains(key);
     }
 
+    // Takes a key and remove it from the hash map
+    remove(key) {
+        const index = this.hash(key);
+
+        // Throw an error if we try to access an out of bound index
+        if (index < 0 || index >= this.buckets.length) {
+            throw new Error("Trying to access index out of bound");
+        }
+
+        const linkedList = this.buckets[index];
+
+        // If the given key is in the hash map, removes the entry and return true
+        if (linkedList.contains(key)) {
+            linkedList.remove(key);
+            this.numberOfEntries -= 1;
+
+            return true;
+        }
+
+        // If the key isn’t in the hash map, returns false
+        return false;
+    }
+
     // Returns the string representation of the bucket (linked list) for the given key
     getBucketAsString(key) {
         const index = this.hash(key);
@@ -106,8 +129,15 @@ test.set("apple", "red");
 test.set("banana", "yellow");
 test.set("carrot", "orange");
 
+// console.log(`Number of buckets: ${test.numberOfBuckets()}`);
+
+// console.log("Is 'ice cream' in the hash map? " + test.has("ice cream"));
+// console.log(test.remove("elephant"));
+// console.log(test);
+// console.log(test.remove("jacket"));
+// console.log("Is 'jacket' in the hash map? " + test.has("jacket"));
+// console.log(test.get("jacket"));
+console.log(test.getBucketAsString("carrot"));
+console.log(test.remove("carrot"));
+console.log(test.getBucketAsString("carrot"));
 console.log(test);
-console.log(`Number of buckets: ${test.numberOfBuckets()}`);
-console.log(test.getBucketAsString("dog"));
-console.log(test.get("grape"));
-console.log("Is 'ice cream' in the hash map? " + test.has("ice cream"));
