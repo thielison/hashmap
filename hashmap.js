@@ -108,6 +108,11 @@ class HashMap {
     numberOfBuckets() {
         return this.buckets.length;
     }
+
+    // Returns the number of stored keys in the hash map
+    length() {
+        return this.numberOfEntries;
+    }
 }
 
 const test = new HashMap();
@@ -129,15 +134,5 @@ test.set("apple", "red");
 test.set("banana", "yellow");
 test.set("carrot", "orange");
 
-// console.log(`Number of buckets: ${test.numberOfBuckets()}`);
-
-// console.log("Is 'ice cream' in the hash map? " + test.has("ice cream"));
-// console.log(test.remove("elephant"));
-// console.log(test);
-// console.log(test.remove("jacket"));
-// console.log("Is 'jacket' in the hash map? " + test.has("jacket"));
-// console.log(test.get("jacket"));
-console.log(test.getBucketAsString("carrot"));
-console.log(test.remove("carrot"));
-console.log(test.getBucketAsString("carrot"));
 console.log(test);
+console.log("Number of entries (key-value pairs): " + test.length());
