@@ -124,6 +124,23 @@ class HashMap {
         // Reset the count of entries
         this.numberOfEntries = 0;
     }
+
+    // Returns an array containing all the keys inside the hash map
+    keys() {
+        const arr = [];
+
+        for (let i = 0; i < this.buckets.length; i++) {
+            const linkedList = this.buckets[i];
+
+            if (linkedList.size() > 0) {
+                const keys = linkedList.extractKeys();
+                arr.push(keys);
+            }
+        }
+
+        // arr.flat() flattens the nested arrays into a single array
+        return arr.flat();
+    }
 }
 
 const test = new HashMap();
@@ -145,6 +162,6 @@ test.set("apple", "red");
 test.set("banana", "yellow");
 test.set("carrot", "orange");
 
-test.clear();
+// console.log(test.clear());
 console.log(test);
-console.log("Number of entries (key-value pairs): " + test.length());
+console.log(test.keys());

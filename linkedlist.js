@@ -80,6 +80,23 @@ class LinkedList {
         return null;
     }
 
+    // Returns an array containing all the keys inside this linked list
+    extractKeys() {
+        if (!this.head || this.listSize === 0) {
+            return;
+        }
+
+        let current = this.head;
+        let arr = [];
+
+        while (current) {
+            arr.push(current.key);
+            current = current.nextNode;
+        }
+
+        return arr;
+    }
+
     // Removes a node with the given key from the linked list
     remove(key) {
         let current = this.head;
