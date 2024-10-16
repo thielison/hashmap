@@ -114,6 +114,22 @@ class LinkedList {
         return arrayOfValues;
     }
 
+    extractKeyValuePairs() {
+        if (!this.head || this.listSize === 0) {
+            return;
+        }
+
+        let current = this.head;
+        const arr = [];
+
+        while (current) {
+            arr.push([current.key, current.value]);
+            current = current.nextNode;
+        }
+
+        return arr;
+    }
+
     // Removes a node with the given key from the linked list
     remove(key) {
         let current = this.head;

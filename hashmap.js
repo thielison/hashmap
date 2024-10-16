@@ -164,6 +164,22 @@ class HashMap {
         // arr.flat() flattens the nested arrays into a single array
         return arr.flat();
     }
+
+    // Returns an array that contains each key-value pair
+    entries() {
+        const keyValuePairsArray = [];
+
+        // Loop through each linked list (bucket) in the hash map
+        for (const linkedList of this.buckets) {
+            // Check if the linked list at this bucket is not empty
+            if (linkedList.size() > 0) {
+                // Extract and flatten key-value pairs into the result array
+                keyValuePairsArray.push(...linkedList.extractKeyValuePairs());
+            }
+        }
+
+        return keyValuePairsArray;
+    }
 }
 
 const test = new HashMap();
@@ -189,3 +205,4 @@ test.set("carrot", "orange");
 console.log(test);
 console.log(test.keys());
 console.log(test.values());
+console.log(test.entries());
