@@ -87,14 +87,31 @@ class LinkedList {
         }
 
         let current = this.head;
-        let arr = [];
+        let arrayOfKeys = [];
 
         while (current) {
-            arr.push(current.key);
+            arrayOfKeys.push(current.key);
             current = current.nextNode;
         }
 
-        return arr;
+        return arrayOfKeys;
+    }
+
+    // Returns an array containing all the values inside this linked list
+    extractValues() {
+        if (!this.head || this.listSize === 0) {
+            return;
+        }
+
+        let current = this.head;
+        let arrayOfValues = [];
+
+        while (current) {
+            arrayOfValues.push(current.value);
+            current = current.nextNode;
+        }
+
+        return arrayOfValues;
     }
 
     // Removes a node with the given key from the linked list

@@ -129,11 +129,34 @@ class HashMap {
     keys() {
         const arr = [];
 
+        // Loop through each bucket in the hash map
         for (let i = 0; i < this.buckets.length; i++) {
+            // Get the linked list at the current bucket index
             const linkedList = this.buckets[i];
 
+            // Check if the linked list at this bucket is not empty
             if (linkedList.size() > 0) {
                 const keys = linkedList.extractKeys();
+                arr.push(keys);
+            }
+        }
+
+        // arr.flat() flattens the nested arrays into a single array
+        return arr.flat();
+    }
+
+    // Returns an array containing all the values
+    values() {
+        const arr = [];
+
+        // Loop through each bucket in the hash map
+        for (let i = 0; i < this.buckets.length; i++) {
+            // Get the linked list at the current bucket index
+            const linkedList = this.buckets[i];
+
+            // Check if the linked list at this bucket is not empty
+            if (linkedList.size() > 0) {
+                const keys = linkedList.extractValues();
                 arr.push(keys);
             }
         }
@@ -165,3 +188,4 @@ test.set("carrot", "orange");
 // console.log(test.clear());
 console.log(test);
 console.log(test.keys());
+console.log(test.values());
