@@ -129,11 +129,8 @@ class HashMap {
     keys() {
         const arr = [];
 
-        // Loop through each bucket in the hash map
-        for (let i = 0; i < this.buckets.length; i++) {
-            // Get the linked list at the current bucket index
-            const linkedList = this.buckets[i];
-
+        // Loop through each linked list (bucket) in the hash map
+        for (const linkedList of this.buckets) {
             // Check if the linked list at this bucket is not empty
             if (linkedList.size() > 0) {
                 const keys = linkedList.extractKeys();
@@ -145,19 +142,16 @@ class HashMap {
         return arr.flat();
     }
 
-    // Returns an array containing all the values
+    // Returns an array containing all the values inside the hash map
     values() {
         const arr = [];
 
-        // Loop through each bucket in the hash map
-        for (let i = 0; i < this.buckets.length; i++) {
-            // Get the linked list at the current bucket index
-            const linkedList = this.buckets[i];
-
+        // Loop through each linked list (bucket) in the hash map
+        for (const linkedList of this.buckets) {
             // Check if the linked list at this bucket is not empty
             if (linkedList.size() > 0) {
-                const keys = linkedList.extractValues();
-                arr.push(keys);
+                const values = linkedList.extractValues();
+                arr.push(values);
             }
         }
 
