@@ -20,6 +20,25 @@ class HashMap {
         return hashCode;
     }
 
+    // Doubles the number of buckets in the HashMap.
+    // Copies existing entries to the new bucket array after clearing the current buckets
+    resizeNumOfBuckets() {
+        // Create a copy of all key-value pairs from the current buckets (linked lists) in the HashMap
+        const entriesCopy = this.entries();
+
+        // Clear all linked lists inside the HashMap and reset the number of entries
+        this.clear();
+
+        // Double the size of the buckets array
+        this.buckets = Array.from({ length: this.numberOfBuckets() * 2 }, () => new LinkedList());
+
+        // Transfer all entries from the old buckets to the new buckets
+        entriesCopy.forEach((pair) => {
+            // [key, value]
+            this.set(pair[0], pair[1]);
+        });
+    }
+
     set(key, value) {
         const index = this.hash(key);
         const linkedList = this.buckets[index];
@@ -35,6 +54,18 @@ class HashMap {
             linkedList.append(key, value);
 
             this.numberOfEntries += 1;
+        }
+
+        // Determine when it is a good time to grow the number of buckets
+        const result = this.numberOfBuckets() * this.loadFactor;
+
+        // Returns the total number of entries (stored key-value pairs) in the hash map
+        const numOfEntries = this.length();
+
+        // If there are more entries in the hash map than the result
+        if (numOfEntries > result) {
+            // Double the number of buckets in the hash map
+            this.resizeNumOfBuckets();
         }
     }
 
@@ -176,27 +207,4 @@ class HashMap {
     }
 }
 
-const test = new HashMap();
-
-// Same bucket
-test.set("grape", "purple");
-test.set("hat", "black");
-
-test.set("dog", "brown");
-test.set("lion", "golden");
-
-// Different buckets
-test.set("elephant", "gray");
-test.set("frog", "green");
-test.set("ice cream", "white");
-test.set("jacket", "blue");
-test.set("kite", "pink");
-test.set("apple", "red");
-test.set("banana", "yellow");
-test.set("carrot", "orange");
-
-// console.log(test.clear());
-console.log(test);
-console.log(test.keys());
-console.log(test.values());
-console.log(test.entries());
+export default HashMap;
