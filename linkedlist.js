@@ -1,8 +1,14 @@
 class Node {
     constructor(key = null, value = null, nextNode = null) {
-        this.key = key;
-        this.value = value;
-        this.nextNode = nextNode;
+        this.key = key; // Stores the key (used in both hash map and hash set)
+
+        if (value === null) {
+            delete this.value; // No 'value' for hash set nodes
+        } else {
+            this.value = value; // Stores the value (used in hash map (key-value pairs))
+        }
+
+        this.nextNode = nextNode; // Points to the next node for collision handling
     }
 }
 
@@ -14,23 +20,31 @@ class LinkedList {
 
     // Append a new node to the Linked List
     append(key, value) {
-        const node = new Node(key, value);
+        let node;
 
-        // If the list is empty, this new node will be set as the head of the Linked List
+        // If no value is passed, it's a HashSet (keys only)
+        if (!value) {
+            node = new Node(key);
+        } else {
+            // If value is passed, it's a HashMap (key-value pair)
+            node = new Node(key, value);
+        }
+
+        // If the list is empty, set the new node as the head
         if (!this.head) {
             this.head = node;
         } else {
             // Traverse to the end of the list
             let current = this.head;
-
             while (current.nextNode) {
                 current = current.nextNode;
             }
 
-            // Append the new node at the end of the list
+            // Append the new node at the end
             current.nextNode = node;
         }
 
+        // Increment the size of the list
         this.listSize += 1;
     }
 
@@ -176,7 +190,14 @@ class LinkedList {
         let string = "";
 
         while (current) {
-            string += `( ${current.key} : ${current.value} ) => `;
+            // If no current.value, it's a HashSet (keys only)
+            if (!current.value) {
+                string += `( ${current.key} ) => `;
+            } else {
+                // If current.value, it's a HashMap (key-value pairs)
+                string += `( ${current.key} : ${current.value} ) => `;
+            }
+
             current = current.nextNode;
         }
 
