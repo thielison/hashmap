@@ -33,7 +33,7 @@ You can run the tests for HashMap and HashSet by using the test files provided:
 ### HashMap Example
 
 ```javascript
-import HashMap from "./hashmap-test.js";
+import HashMap from "./hashmap.js";
 
 const test = new HashMap();
 test.set("apple", "red");
@@ -43,7 +43,7 @@ console.log(test.get("apple")); // Output: red
 ### HashSet Example
 
 ```javascript
-import HashSet from "./hashset-test.js";
+import HashSet from "./hashset.js";
 
 const test = new HashSet();
 test.set("grape");
